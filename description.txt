@@ -1,0 +1,1 @@
+"Gift" adds a possibility of giving to Town NPCs gifts and thus increasing their happiness level. If they will be happy enough, amybe they'll give something to you?
