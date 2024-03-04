@@ -1,11 +1,12 @@
-using Terraria;
+﻿using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
+using Gift.Changes;
 
 namespace Gift.Changes.NPCs
 {
-    public class ModifiedNurse : GlobalNPC
+    public class ModifiedDryad : GlobalNPC
     {
         public int happiness_level = 1;
         GetHappinessPoints get;
@@ -15,31 +16,34 @@ namespace Gift.Changes.NPCs
         {
             Player player = Main.LocalPlayer;
 
-            if (npc.type == NPCID.Nurse)
+            if (npc.type == NPCID.Dryad)
             {
                 if (!firstButton)
                 {
-                   if (happiness_level >= 100)
+                    if (happiness_level >= 100)
                     {
-                        player.AddBuff(BuffID.Lifeforce, 54000);
+                        player.AddBuff(BuffID.DryadsWard, 54000);
                         happiness_level = 100;
 
-                   }
-                   if (happiness_level >= 25)
-                   {
-                        player.AddBuff(BuffID.Regeneration, 54000);
                     }
-                    happiness_level += get.Happiness(player, ItemID.LifeCrystal, ItemID.LifeFruit);
+                    if (happiness_level >= 25)
+                    {
+                        // grants buff happy
+                        player.AddBuff(146, 54000);
+                    }
+                    // 3467 - Luminite Bars
+                    happiness_level += get.Happiness(player, ItemID.Sunflower, 3467);
                 }
             }
         }
         public override void SaveData(NPC npc, TagCompound tag)
         {
-                tag.Add("NurseHappiness", happiness_level);
+            tag.Add("DryadHappiness", happiness_level);
         }
         public override void LoadData(NPC npc, TagCompound tag)
         {
-            happiness_level = tag.GetAsInt("NurseHappiness");
+            happiness_level = tag.GetAsInt("DryadHappiness");
         }
+
     }
 }

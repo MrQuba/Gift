@@ -5,7 +5,7 @@ using Terraria.ModLoader.IO;
 
 namespace Gift.Changes.NPCs
 {
-    public class ModifiedNurse : GlobalNPC
+    public class ModifiedGuide : GlobalNPC
     {
         public int happiness_level = 1;
         GetHappinessPoints get;
@@ -15,31 +15,32 @@ namespace Gift.Changes.NPCs
         {
             Player player = Main.LocalPlayer;
 
-            if (npc.type == NPCID.Nurse)
+            if (npc.type == NPCID.Guide)
             {
                 if (!firstButton)
                 {
                    if (happiness_level >= 100)
                     {
-                        player.AddBuff(BuffID.Lifeforce, 54000);
+                        player.AddBuff(BuffID.ObsidianSkin, 54000);
                         happiness_level = 100;
 
                    }
                    if (happiness_level >= 25)
-                   {
-                        player.AddBuff(BuffID.Regeneration, 54000);
+                    {
+                        player.AddBuff(BuffID.Spelunker, 54000);
                     }
-                    happiness_level += get.Happiness(player, ItemID.LifeCrystal, ItemID.LifeFruit);
+                    happiness_level += get.Happiness(player, ItemID.GlowingMushroom, ItemID.GuideVoodooDoll);
                 }
             }
         }
         public override void SaveData(NPC npc, TagCompound tag)
         {
-                tag.Add("NurseHappiness", happiness_level);
+                tag.Add("GuideHappiness", happiness_level);
         }
         public override void LoadData(NPC npc, TagCompound tag)
         {
-            happiness_level = tag.GetAsInt("NurseHappiness");
+            happiness_level = tag.GetAsInt("GuideHappiness");
         }
+
     }
 }
